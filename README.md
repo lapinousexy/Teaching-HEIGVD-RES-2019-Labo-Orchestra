@@ -105,9 +105,9 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | --- | --- |
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
-| | *Insert your diagram here...* |
+| | ![](images/RES_Labo05_Diagram.png) |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | *Enter your response here...* |
+| | The musician, each seconds |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
 | | *Enter your response here...* |
 |Question | What **payload** should we put in the UDP datagrams? |
@@ -133,9 +133,9 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
 | | *Enter your response here...*  |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | Create a UDP socket first (dgram.createSocket()) and then send datagrams  |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | By process.argv[] array |
 
 
 ## Task 3: package the "musician" app in a Docker image

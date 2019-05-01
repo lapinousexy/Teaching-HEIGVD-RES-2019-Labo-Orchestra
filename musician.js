@@ -1,4 +1,5 @@
 var dgram = require('dgram');
+
 var protocol = require('./musician-protocol');
 
 var instrumentArray = [["piano","ti-ta-ti"],["trumpet","pouet"],["flute","trulu"],["violin","gzi-gzi"],["drum","bum-boum"]];
@@ -25,6 +26,5 @@ function Instrument(type){
     this.sound = instrumentMap.get(type);
 }
 
-// TODO : Connect to TCP server to receive JSON Instrument
-var instru = new Instrument("piano");
+var instru = new Instrument(process.argv[2]);
 var musi = new Musician(instru);
