@@ -1,18 +1,15 @@
 var dgram = require('dgram');
 var moment = require('moment');
 var net = require('net');
+var ip = require("ip");
 
 var protocol = require('./musician-protocol');
 
 var socketMusicUDP = dgram.createSocket('udp4');
 
-var socketTCP = net.createServer(function(socket) {
-    var sock = socket;
-    socket.write('Test\r\n');
+var socketTCP = net.createServer();
 
-});
-
-socketTCP.listen(1337, "172.17.0.3");
+socketTCP.listen(1337, ip.address());
 
 function isDuplicateUUID(array, uuid){
     var isPresent = false;
@@ -61,12 +58,12 @@ function Auditor(){
     });
 
     socketTCP.on('connection', function(socket){
-        console.log("LAAAAAAAAAAAA");
+        console.log("Client connected");
 
         socket.on('data', function(data){
-            console.log("LAAAAAAAAAAAA2");
-    
-            socket.write('Test\r\n');
+            console.log("Sending answer");
+
+            socket.write(Buffer(JSON.stringify(self.musicians)));
         });
     });
 
@@ -79,8 +76,6 @@ function Auditor(){
                 array.splice(array.indexOf(element), 1);
             }
         });
-
-        console.log(this.musicians);
     };
 
     setInterval(this.verifyTimestampOfMusician.bind(this), 1000);
