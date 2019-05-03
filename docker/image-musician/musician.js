@@ -17,20 +17,16 @@ function Musician(instrument){
     auditorPayload = new Buffer(JSON.stringify(this));
 
     socketAuditorUDP.on("message", function(){
-        console.log("Received request");
-
         socketAuditorUDP.send(auditorPayload, 0, auditorPayload.length, 40001, protocol.GROUP_IP, function() {
+            
         });
     });
-
-    socketAuditorUDP.bind(protocol.AUDITOR_PORT);
 
     Musician.prototype.playInstrument = function(){
         this.date = new Date();
 
-        var udpPayload = this.instrument.sound;
-        soundMessage = new Buffer(udpPayload);
-        
+        soundMessage = new Buffer(JSON.stringify(this));
+
         socketMusicUDP.send(soundMessage,0,soundMessage.length, protocol.UDP_PORT, protocol.GROUP_IP, function() {
         });
 
