@@ -11,7 +11,9 @@ var socketAuditorUDP = dgram.createSocket('udp4');
 // This was inspired by Thermometer example + https://nodejs.org/api/dgram.html
 function Musician(instrument){
     this.uuid = uuid.v4();
-    this.instrument = instrument;
+    this.instrument = instrument.instrument;
+    this.sound = instrument.sound;
+
     this.date = new Date();
 
     auditorPayload = new Buffer(JSON.stringify(this));

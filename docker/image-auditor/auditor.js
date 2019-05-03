@@ -9,7 +9,7 @@ var socketMusicUDP = dgram.createSocket('udp4');
 
 var socketTCP = net.createServer();
 
-socketTCP.listen(1337, ip.address());
+socketTCP.listen(protocol.TCP_PORT, ip.address());
 
 function isDuplicateUUID(array, uuid){
     var isPresent = false;
@@ -60,10 +60,13 @@ function Auditor(){
     socketTCP.on('connection', function(socket){
         console.log("Client connected");
 
+        socket.write(Buffer(JSON.stringify(self.musicians)));
+        socket.write('\r\n');
+        socket.end();
+
         socket.on('data', function(data){
             console.log("Sending answer");
 
-            socket.write(Buffer(JSON.stringify(self.musicians)));
         });
     });
 
